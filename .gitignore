@@ -23,9 +23,12 @@
 hs_err_pid*
 
 # IntelliJ
-.idea/
-*.iml
-*.ipr
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/tasks.xml
+.idea/shelf/
+.idea/libraries
+urn.rest-test.org.netkernel.demo.petclinic/urn.rest-test.org.netkernel.demo.petclinic.iml
 *.iws
 
 # Eclipse

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/urn.org.netkernel.demo.petclinic/urn.org.netkernel.demo.petclinic.iml" filepath="$PROJECT_DIR$/urn.org.netkernel.demo.petclinic/urn.org.netkernel.demo.petclinic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/urn.org.netkernel.demo.petclinic.db/urn.org.netkernel.demo.petclinic.db.iml" filepath="$PROJECT_DIR$/urn.org.netkernel.demo.petclinic.db/urn.org.netkernel.demo.petclinic.db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/urn.rest-test.org.netkernel.demo.petclinic/urn.rest-test.org.netkernel.demo.petclinic.iml" filepath="$PROJECT_DIR$/urn.rest-test.org.netkernel.demo.petclinic/urn.rest-test.org.netkernel.demo.petclinic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/urn.test.org.netkernel.demo.petclinic/urn.test.org.netkernel.demo.petclinic.iml" filepath="$PROJECT_DIR$/urn.test.org.netkernel.demo.petclinic/urn.test.org.netkernel.demo.petclinic.iml" />
+    </modules>
+  </component>
+</project>
