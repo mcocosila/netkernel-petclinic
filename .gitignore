@@ -28,7 +28,6 @@ hs_err_pid*
 .idea/tasks.xml
 .idea/shelf/
 .idea/libraries
-urn.rest-test.org.netkernel.demo.petclinic/urn.rest-test.org.netkernel.demo.petclinic.iml
 *.iws
 
 # Eclipse
