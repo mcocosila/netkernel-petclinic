@@ -101,5 +101,4 @@ For more details, see screenshots in card https://trello.com/c/SlGrYQQI
 
 # Technical architecture
   - See card https://trello.com/c/Lqbnv6K5
-
-== Florin git push test ==
+  
