@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/mcocosila/netkernel-petclinic/tree/master.svg?style=svg)](https://circleci.com/gh/mcocosila/netkernel-petclinic/tree/master)
+
 # NetKernel PetClinic
 https://github.com/1060NetKernel/netkernel-petclinic
 
