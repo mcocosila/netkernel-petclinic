@@ -1,0 +1,1 @@
+SELECT id, pet_id, visit_date, description FROM visits WHERE pet_id = '${petId}'

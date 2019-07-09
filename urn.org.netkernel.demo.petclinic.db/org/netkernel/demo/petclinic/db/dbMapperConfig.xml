@@ -121,4 +121,46 @@
         <header name="mime">text/xml</header>
     </endpoint>
 
+
+    <endpoint>
+        <grammar>
+            <simple>res:/petclinic/api/java/owners/{ownerId}</simple>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernel.demo.petclinic.GetOwnerAccessor</argument>
+            <argument name="ownerId">arg:ownerId</argument>
+        </request>
+    </endpoint>
+    <endpoint>
+        <grammar>
+            <simple>res:/petclinic/api/java/pets-for-owner/{ownerId}</simple>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernel.demo.petclinic.GetPetForOwnerAccessor</argument>
+            <argument name="ownerId">arg:ownerId</argument>
+        </request>
+    </endpoint>
+    <endpoint>
+        <grammar>
+            <simple>res:/petclinic/api/java/pet-type/{typeId}</simple>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernel.demo.petclinic.GetPetTypeAccessor</argument>
+            <argument name="typeId">arg:typeId</argument>
+        </request>
+    </endpoint>
+    <endpoint>
+        <grammar>
+            <simple>res:/petclinic/api/java/pet-visit/{petId}</simple>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernel.demo.petclinic.GetPetVisitsAccessor</argument>
+            <argument name="petId">arg:petId</argument>
+        </request>
+    </endpoint>
+
 </config>

@@ -1,0 +1,1 @@
+SELECT id, name, birth_date, type_id, owner_id FROM pets WHERE owner_id = '${ownerId}'
