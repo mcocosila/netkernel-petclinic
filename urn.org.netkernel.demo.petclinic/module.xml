@@ -22,6 +22,9 @@
         <fileset>
             <regex>res:/etc/system/SimpleDynamicImportHook.xml</regex>
         </fileset>
+        <import>
+            <uri>urn:org:netkernel:demo:petclinic:db</uri>
+        </import>
         <mapper>
             <config>
                 <import>res:/org/netkernel/demo/petclinic/owner/ownerMapperConfig.xml</import>

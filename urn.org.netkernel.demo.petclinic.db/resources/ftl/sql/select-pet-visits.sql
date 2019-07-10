@@ -1,0 +1,1 @@
+SELECT id, pet_id, TO_CHAR(visit_date, 'YYYY/MM/DD') as visit_date, description FROM visits WHERE pet_id = '${petId}'

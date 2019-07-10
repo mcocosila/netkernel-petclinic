@@ -98,7 +98,7 @@
 
     <endpoint>
         <grammar>
-            <simple>res:/petclinic/api/owners/{ownerId}</simple>
+            <simple>res:/petclinic/api/gy/owners/{ownerId}</simple>
         </grammar>
         <request>
             <identifier>active:owner-XML</identifier>
@@ -119,6 +119,48 @@
             <!--<representation>org.netkernel.xml.xda.IXDAReadOnly</representation>-->
         </request>
         <header name="mime">text/xml</header>
+    </endpoint>
+
+
+    <endpoint>
+        <grammar>
+            <simple>res:/petclinic/api/owners/{ownerId}</simple>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernel.demo.petclinic.GetOwnerAccessor</argument>
+            <argument name="ownerId">arg:ownerId</argument>
+        </request>
+    </endpoint>
+    <endpoint>
+        <grammar>
+            <simple>res:/petclinic/api/pets-for-owner/{ownerId}</simple>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernel.demo.petclinic.GetPetForOwnerAccessor</argument>
+            <argument name="ownerId">arg:ownerId</argument>
+        </request>
+    </endpoint>
+    <endpoint>
+        <grammar>
+            <simple>res:/petclinic/api/pet-type/{typeId}</simple>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernel.demo.petclinic.GetPetTypeAccessor</argument>
+            <argument name="typeId">arg:typeId</argument>
+        </request>
+    </endpoint>
+    <endpoint>
+        <grammar>
+            <simple>res:/petclinic/api/pet-visit/{petId}</simple>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">org.netkernel.demo.petclinic.GetPetVisitsAccessor</argument>
+            <argument name="petId">arg:petId</argument>
+        </request>
     </endpoint>
 
 </config>

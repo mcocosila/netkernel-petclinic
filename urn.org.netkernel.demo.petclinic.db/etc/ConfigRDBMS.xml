@@ -2,7 +2,8 @@
 	<rdbms>
 		<jdbcDriver>org.postgresql.Driver</jdbcDriver>
 		<!--Edit this jdbcConnection url to point to a directory on your disk-->
-		<jdbcConnection>jdbc:postgresql://192.168.99.100:5432/petclinic</jdbcConnection>
+		<!--jdbcConnection>jdbc:postgresql://192.168.99.100:5432/petclinic</jdbcConnection-->
+		<jdbcConnection>jdbc:postgresql://localhost:5432/petclinic</jdbcConnection>
 		<user>postgres</user>
 		<password>petclinic</password>
 		<!--<shutdown>true</shutdown>-->
