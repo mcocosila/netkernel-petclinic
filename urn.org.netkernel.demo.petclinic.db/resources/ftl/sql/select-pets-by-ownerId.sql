@@ -1,1 +1,1 @@
-SELECT id, name, birth_date, type_id, owner_id FROM pets WHERE owner_id = '${ownerId}'
+SELECT id, name, TO_CHAR(birth_date, 'YYYY/MM/DD') as birth_date, type_id, owner_id FROM pets WHERE owner_id = '${ownerId}'

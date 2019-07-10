@@ -3,6 +3,7 @@ package org.netkernel.demo.petclinic;
 import org.json.JSONObject;
 import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
+import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.IHDSNodeList;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
@@ -46,8 +47,8 @@ public class GetOwnerAccessor extends StandardAccessorImpl
 //        JSONObject jsonResp = (JSONObject)context.issueRequest(request);
 
         JSONObject ownerJson = hdsToJson(ownerHds);
-
-        context.createResponseFrom(ownerJson);
+        INKFResponse response = context.createResponseFrom(ownerJson);
+        response.setMimeType("application/json;charset=UTF-8");
     }
 
 

@@ -60,7 +60,7 @@ public class GetPetForOwnerAccessor extends StandardAccessorImpl
             builder.addNode("name", petTypeHdsResp.getFirstValue("name"));
             builder.popNode();
 
-            builder.addNode("owner", ownerId);
+            builder.addNode("owner", petHds.getFirstValue("owner_id"));
 
             builder.pushNode("visits");
             IHDSNodeList visitNodeList =  visitResp.getNodes("visit");
