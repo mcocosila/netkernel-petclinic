@@ -1,15 +1,13 @@
 package org.netkernel.demo.petclinic;
 
-import org.json.JSONObject;
 import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
-import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.IHDSNodeList;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
 import org.netkernel.layer0.representation.impl.HDSNodeImpl;
 import org.netkernel.module.standard.endpoint.StandardAccessorImpl;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GetPetVisitsAccessor extends StandardAccessorImpl
@@ -31,24 +29,22 @@ public class GetPetVisitsAccessor extends StandardAccessorImpl
         request.setRepresentationClass(HDSNodeImpl.class);
         HDSNodeImpl petVisitsHdsResp = (HDSNodeImpl)context.issueRequest(request);
 
+
         IHDSNodeList visitNodeList =  petVisitsHdsResp.getNodes("resultset/row");
-        ArrayList<JSONObject> visitJsonList = new ArrayList<>();
+        HDSBuilder builder = new HDSBuilder();
         Iterator<IHDSNode> it = visitNodeList.iterator();
         while(it.hasNext()) {
             IHDSNode visitHds = it.next();
 
-            // convert hds to json
-            request = context.createRequest("active:JSONFromHDS");
-            request.addArgumentByValue("operand", visitHds);
-            request.setRepresentationClass(JSONObject.class);
-            JSONObject jsonResp = (JSONObject)context.issueRequest(request);
+            builder.pushNode("visit");
+            builder.addNode("id", visitHds.getFirstValue("id"));
+            builder.addNode("pet", visitHds.getFirstValue("pet_id"));
+            builder.addNode("visitDate", visitHds.getFirstValue("visit_date"));
+            builder.addNode("description", visitHds.getFirstValue("description"));
+            builder.popNode();
 
-            jsonResp.remove("pet_id");
-            jsonResp.put("pet", petId);
-
-            visitJsonList.add(jsonResp);
         }
 
-        INKFResponse response = context.createResponseFrom( visitJsonList );
+        context.createResponseFrom( builder.getRoot() );
     }
 }

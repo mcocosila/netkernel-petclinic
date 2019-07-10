@@ -1,15 +1,13 @@
 package org.netkernel.demo.petclinic;
 
-import org.json.JSONObject;
 import org.netkernel.layer0.nkf.INKFRequest;
 import org.netkernel.layer0.nkf.INKFRequestContext;
-import org.netkernel.layer0.nkf.INKFResponse;
 import org.netkernel.layer0.representation.IHDSNode;
 import org.netkernel.layer0.representation.IHDSNodeList;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
 import org.netkernel.layer0.representation.impl.HDSNodeImpl;
 import org.netkernel.module.standard.endpoint.StandardAccessorImpl;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GetPetForOwnerAccessor extends StandardAccessorImpl
@@ -31,38 +29,56 @@ public class GetPetForOwnerAccessor extends StandardAccessorImpl
         request.setRepresentationClass(HDSNodeImpl.class);
         HDSNodeImpl petsHdsResp = (HDSNodeImpl)context.issueRequest(request);
 
-        IHDSNodeList petsNodeList =  petsHdsResp.getNodes("resultset/row");
-        ArrayList<JSONObject> petJsonList = new ArrayList<>();
-        Iterator<IHDSNode> it = petsNodeList.iterator();
-        while(it.hasNext()) {
-            IHDSNode petHds = it.next();
-            JSONObject petJson = new JSONObject();
+        HDSBuilder builder = new HDSBuilder();
+        builder.pushNode("pets");
 
-            Object id = petHds.getFirstValue("id");
-            Object name = petHds.getFirstValue("name");
-            Object birthDate = petHds.getFirstValue("birth_date");
-            Object typeId = petHds.getFirstValue("type_id");
-            //Object ownerId = petHds.getFirstValue("owner_id");
+        IHDSNodeList petsNodeList =  petsHdsResp.getNodes("resultset/row");
+        Iterator<IHDSNode> itPets = petsNodeList.iterator();
+        while(itPets.hasNext()) {
+            IHDSNode petHds = itPets.next();
 
             // get the pet type
-            request = context.createRequest("res:/petclinic/api/java/pet-type/"+typeId);
-            request.setRepresentationClass(JSONObject.class);
-            JSONObject typeJsonResp = (JSONObject)context.issueRequest(request);
+            Object typeId = petHds.getFirstValue("type_id");
+            request = context.createRequest("res:/petclinic/api/pet-type/"+typeId);
+            request.setRepresentationClass(HDSNodeImpl.class);
+            HDSNodeImpl petTypeHdsResp = (HDSNodeImpl)context.issueRequest(request);
 
             // get visits
-            request = context.createRequest("res:/petclinic/api/java/pet-visit/"+id);
-            Object visitResp = context.issueRequest(request);
+            Object id = petHds.getFirstValue("id");
+            request = context.createRequest("res:/petclinic/api/pet-visit/"+id);
+            request.setRepresentationClass(HDSNodeImpl.class);
+            HDSNodeImpl visitResp = (HDSNodeImpl)context.issueRequest(request);
 
-            petJson.put("id", id);
-            petJson.put("name", name);
-            petJson.put("birthDate", birthDate);
-            petJson.put("type", typeJsonResp);
-            petJson.put("owner", ownerId);
-            petJson.put("visits", visitResp);
+            // build the hds pet node
+            builder.pushNode("pet");
+            builder.addNode("id", petHds.getFirstValue("id"));
+            builder.addNode("name", petHds.getFirstValue("name"));
+            builder.addNode("birthDate", petHds.getFirstValue("birth_date"));
 
-            petJsonList.add(petJson);
+            builder.pushNode("type");
+            builder.addNode("id", petTypeHdsResp.getFirstValue("id"));
+            builder.addNode("name", petTypeHdsResp.getFirstValue("name"));
+            builder.popNode();
+
+            builder.addNode("owner", ownerId);
+
+            builder.pushNode("visits");
+            IHDSNodeList visitNodeList =  visitResp.getNodes("visit");
+            Iterator<IHDSNode> itVisits = visitNodeList.iterator();
+            while(itVisits.hasNext()) {
+                IHDSNode visitHds = itVisits.next();
+                builder.pushNode("visit");
+                builder.addNode("id", visitHds.getFirstValue("id"));
+                builder.addNode("pet", visitHds.getFirstValue("pet"));
+                builder.addNode("visitDate", visitHds.getFirstValue("visitDate"));
+                builder.addNode("description", visitHds.getFirstValue("description"));
+                builder.popNode();
+            }
+            builder.popNode();  // pop visits
+
+            builder.popNode();  // pop pet
         }
 
-        INKFResponse response = context.createResponseFrom(petJsonList);
+        context.createResponseFrom(builder.getRoot());
     }
 }

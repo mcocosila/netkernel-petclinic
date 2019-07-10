@@ -98,7 +98,7 @@
 
     <endpoint>
         <grammar>
-            <simple>res:/petclinic/api/owners/{ownerId}</simple>
+            <simple>res:/petclinic/api/gy/owners/{ownerId}</simple>
         </grammar>
         <request>
             <identifier>active:owner-XML</identifier>
@@ -124,7 +124,7 @@
 
     <endpoint>
         <grammar>
-            <simple>res:/petclinic/api/java/owners/{ownerId}</simple>
+            <simple>res:/petclinic/api/owners/{ownerId}</simple>
         </grammar>
         <request>
             <identifier>active:java</identifier>
@@ -134,7 +134,7 @@
     </endpoint>
     <endpoint>
         <grammar>
-            <simple>res:/petclinic/api/java/pets-for-owner/{ownerId}</simple>
+            <simple>res:/petclinic/api/pets-for-owner/{ownerId}</simple>
         </grammar>
         <request>
             <identifier>active:java</identifier>
@@ -144,7 +144,7 @@
     </endpoint>
     <endpoint>
         <grammar>
-            <simple>res:/petclinic/api/java/pet-type/{typeId}</simple>
+            <simple>res:/petclinic/api/pet-type/{typeId}</simple>
         </grammar>
         <request>
             <identifier>active:java</identifier>
@@ -154,7 +154,7 @@
     </endpoint>
     <endpoint>
         <grammar>
-            <simple>res:/petclinic/api/java/pet-visit/{petId}</simple>
+            <simple>res:/petclinic/api/pet-visit/{petId}</simple>
         </grammar>
         <request>
             <identifier>active:java</identifier>
